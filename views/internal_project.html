@@ -3,7 +3,7 @@
         <h1>{{projects.name}}</h1>
     </div>
     <div class="row">
-        <div class="col-md-6 text-center">
+        <div class="col-md-4 text-center">
             <h2>Approved Purchases</h2>
             <p>
                 Once the group votes yes on an item, it goes here.
@@ -21,7 +21,7 @@
 
             </div>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-4 text-center">
             <h2>Suggested Purchases</h2>
 
             <div id="suggested-purchases">
@@ -29,17 +29,20 @@
                 {{#each purchases.suggested}}
                 <div class="project list-group-item">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{name}}</h5>
+                        <h5 class="mb-1">{{name}}
+                        </h5>
+                        <a href="/i/purchase/{{purchaseID}}/approve">Vote Yes</a><br>
+                        <a href="/i/purchase/{{purchaseID}}/deny">Vote No</a><br>
                     </div>
                 </div>
                 {{/each}}
 
             </div>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-2 text-center">
             <h2>Options</h2>
 
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#create_projectModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_projectModal">
                 Suggest a Purchase
             </button>
 

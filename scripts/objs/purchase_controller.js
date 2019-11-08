@@ -99,10 +99,29 @@ function approvePurchase(req,res) {
         res.redirect("/i/project/" + newPurchase.project);
     });
 }
+function denyPurchase(req,res) {
+
+    let purchaseID = req.params.purchaseID;
+    let uid = req.session.userData.uid;
+
+    let newPurchase = new Purchase({purchaseID:purchaseID});
+
+    newPurchase.get().then(()=>{
+        newPurchase.voters.forEach(voter=>{
+            if(voter.uid === uid){
+                voter.vote = false;
+            }
+        });
+        return newPurchase.push();
+    }).then(()=>{
+        res.redirect("/i/project/" + newPurchase.project);
+    });
+}
 
 module.exports = {
     newPurchase,
     getData,
     listMyPurchases,
     approvePurchase,
+    denyPurchase,
 };
