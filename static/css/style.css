@@ -32,10 +32,21 @@
     width: 50%;
     text-align: center; }
 
+#projects .project:hover {
+  cursor: pointer;
+  background-color: #dddddd; }
+
 .loginBox {
+  margin-top: 10vh;
   text-align: center; }
 
 .registerBox {
+  margin-top: 10vh;
   text-align: center; }
+
+.slide a {
+  position: fixed;
+  bottom: 10px;
+  right: 10px; }
 
 /*# sourceMappingURL=style.css.map */

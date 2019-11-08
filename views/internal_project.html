@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="welcome text-center m-5">
+        <h1>{{projects.name}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h2>Approved Purchases</h2>
+            <p>
+                Once the group votes yes on an item, it goes here.
+            </p>
+
+            <div class="list-group">
+
+                {{#each purchases.approved}}
+                <div class="project list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{name}}</h5>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <h2>Suggested Purchases</h2>
+
+            <div id="suggested-purchases">
+
+                {{#each purchases.suggested}}
+                <div class="project list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{name}}</h5>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <h2>Options</h2>
+
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#create_projectModal">
+                Suggest a Purchase
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="create_projectModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create a Purchase</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="/i/project/{{projects.pid}}/newPurchase">
+                <div class="modal-body">
+
+                    <input type="hidden" name="pid" value="{{projects.pid}}">
+
+                    <div class="form-group">
+                        <label for="name">Purchase Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Beach Trip!" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Maximum Cost (Dollar amount)</label>
+                        <input type="number" class="form-control" name="budget" id="budget" placeholder="200" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" onclick="">Create Purchase</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

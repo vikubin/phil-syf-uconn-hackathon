@@ -83,7 +83,22 @@ function newUser(req,res) {
     });
 }
 
+function listNames() {
+    return db.collection("users").get().then(snap => {
+        let nameArray = [];
+        snap.forEach(item => {
+            nameArray.push(item.data().name)
+        });
+        return Promise.resolve(nameArray);
+    }).catch(err => {
+        return Promise.reject(err);
+    })
+}
+
 module.exports = {
     loginUser,
-    newUser
+    newUser,
+    listNames,
 };
+
+listNames();

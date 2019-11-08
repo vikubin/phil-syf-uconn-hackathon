@@ -1,4 +1,7 @@
 const utils = require('./utils');
+const user_controller = require("./objs/user_controller");
+const project_controller = require("./objs/project_controller");
+const purchase_controller = require("./objs/purchase_controller");
 
 module.exports = {
     index(req,res){
@@ -34,6 +37,35 @@ module.exports = {
         utils.render(res,res,{},"register","external");
     },
     internal_index(req,res){
-        utils.render(res,res,{},"internal_index","internal");
+
+        Promise.all([
+            project_controller.listMyProjects(req),
+        ]).then(pRet => {
+
+            utils.render(res,res,{
+                userName: req.session.userData.name,
+                projects: pRet[0],
+            },"internal_index","internal");
+
+        }).catch(err => {
+            this.error(req,res,err);
+        });
     },
+    internal_project(req,res){
+
+        Promise.all([
+            project_controller.getData(req.params.pid),
+            purchase_controller.listMyPurchases(req.params.pid)
+        ]).then(pRet => {
+
+            utils.render(res,res,{
+                userName: req.session.userData.name,
+                projects: pRet[0],
+                purchases: pRet[1],
+            },"internal_project","internal");
+
+        }).catch(err => {
+            this.error(req,res,err);
+        });
+    }
 };

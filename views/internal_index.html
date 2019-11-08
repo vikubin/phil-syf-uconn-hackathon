@@ -1,1 +1,71 @@
-internal
+<div class="container">
+    <div class="welcome text-center m-5">
+        <h1>Welcome to Project Bank, {{userName}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h2>Your Projects</h2>
+
+            <div id="projects">
+                <div id="project-stream" class="list-group">
+
+                    {{#each projects}}
+                    <div class="project list-group-item" onclick="window.location = '/i/project/{{id}}'">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{name}}</h5>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    {{#if noProjects}}
+                    <p>There are no projects yet.</p>
+                    {{/if}}
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <h2>Options</h2>
+
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#create_projectModal">
+                Create A Project
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="create_projectModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create a Project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="/i/newProject">
+            <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="name">Project Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Beach Trip!" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Budget (Dollar amount)</label>
+                        <input type="number" class="form-control" name="budget" id="budget" placeholder="200" required>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="">Create Project</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
