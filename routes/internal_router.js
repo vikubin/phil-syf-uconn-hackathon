@@ -35,4 +35,8 @@ router.post('/project/:pid/newPurchase',(req,res)=>{
     purchase_controller.newPurchase(req,res);
 });
 
+router.post('/purchase/:purchaseID/approve',(req,res)=>{
+    purchase_controller.approvePurchase(req,res);
+});
+
 module.exports = router;

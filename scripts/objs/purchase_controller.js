@@ -46,8 +46,8 @@ function newPurchase(req,res) {
 
 }
 
-function getData(pid) {
-    let newPurchase = new Purchase({pid:pid});
+function getData(purchaseID) {
+    let newPurchase = new Purchase({purchaseID:purchaseID});
     return newPurchase.get().then(()=>{
         return Promise.resolve(newPurchase.data());
     }).catch(err => {
@@ -81,8 +81,28 @@ function listMyPurchases(pid) {
     });
 }
 
+function approvePurchase(req,res) {
+
+    let purchaseID = req.params.purchaseID;
+    let uid = req.session.userData.uid;
+
+    let newPurchase = new Purchase({purchaseID:purchaseID});
+
+    newPurchase.get().then(()=>{
+        newPurchase.voters.forEach(voter=>{
+            if(voter.uid === uid){
+                voter.vote = true;
+            }
+        });
+        return newPurchase.push();
+    }).then(()=>{
+        res.redirect("/i/project/" + newPurchase.project);
+    });
+}
+
 module.exports = {
     newPurchase,
     getData,
     listMyPurchases,
+    approvePurchase,
 };
