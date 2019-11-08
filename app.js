@@ -44,6 +44,10 @@ app.get('/', (req,res) => {
    page.index(req,res);
 });
 
+// Internal Routes
+const internal_router = require("./routes/internal_router");
+app.use("/i",internal_router);
+
 // 404
 app.get('/*', (req,res) => {
     page.error(req,res,"404");

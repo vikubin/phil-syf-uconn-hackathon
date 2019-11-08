@@ -6,14 +6,42 @@
 
 .hero{
   width: 100%;
+  min-height: 600px;
+  height: calc(100vh - 61px);
+  background-image: url("/s/img/main_dull.jpg");
+  background-size: cover;
+  .lead{
+    text-align: center;
+    padding: 10vh 0;
+    margin-bottom: 5vh;
+    h1{
+      color: #111111;
+      font-size: 3rem;
+    }
+    h2{
+      color: #333333;
+      font-size: 1.2rem;
+    }
+  }
+  .hero-item{
+    height: 40vh;
+    min-height: 140px;
+    padding: 10vh 0;
+  }
+  .hero-left{
+    float: left;
+    width: calc(50% - 2px);
+    text-align: center;
+    border-right: solid grey 2px;
+  }
+  .hero-right{
+    float: right;
+    width: 50%;
+    text-align: center;
+  }
 }
-.hero-left{
-  float: left;
-  width: 50%;
-  text-align: center;
-}
-.hero-right{
-  float: right;
-  width: 50%;
-  text-align: center;
+
+
+.loginBox{
+  
 }

@@ -1,0 +1,35 @@
+.nav {
+  width: 100%;
+  background-color: grey; }
+
+.hero {
+  width: 100%;
+  min-height: 600px;
+  height: calc(100vh - 61px);
+  background-image: url("/s/img/main_dull.jpg");
+  background-size: cover; }
+  .hero .lead {
+    text-align: center;
+    padding: 10vh 0;
+    margin-bottom: 5vh; }
+    .hero .lead h1 {
+      color: #111111;
+      font-size: 3rem; }
+    .hero .lead h2 {
+      color: #333333;
+      font-size: 1.2rem; }
+  .hero .hero-item {
+    height: 40vh;
+    min-height: 140px;
+    padding: 10vh 0; }
+  .hero .hero-left {
+    float: left;
+    width: calc(50% - 2px);
+    text-align: center;
+    border-right: solid grey 2px; }
+  .hero .hero-right {
+    float: right;
+    width: 50%;
+    text-align: center; }
+
+/*# sourceMappingURL=style.css.map */
