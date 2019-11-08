@@ -11,6 +11,10 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+// For google's health checks
+app.get('/_ah/*', (req,res) => {
+    res.status(404).send();
+});
 
 // Log Requests
 app.use((req,res,next)=>{
@@ -32,6 +36,11 @@ app.engine('html', exphbs( {
 // Landing Page
 app.get('/', (req,res) => {
     res.send("test");
+});
+
+// 404
+app.get('/*', (req,res) => {
+    utils.page.error(req,res,"404");
 });
 
 
