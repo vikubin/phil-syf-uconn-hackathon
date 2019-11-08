@@ -2,17 +2,17 @@
 
 module.exports = {
     /**
-     * Render a page
+     * Renders a page
      * @param req
      * @param res
-     * @param params
-     * @param template
-     * @param layout
+     * @param {Object}  pageData    - Stuff to put on pg
+     * @param {string}  template    - Page template
+     * @param {string}  layout      - Layout
      */
-    render(req, res, params = {}, template, layout = "external"){
-        console.log('utils => rendering with Params: ', params, '\nTemplate: ', template, '\nLayout:', layout);
-        let context = params.data || {};
+    render(req, res, pageData = {}, template, layout = "external"){
+        console.log('utils => rendering with Params: ', pageData, '\nTemplate: ', template, '\nLayout:', layout);
+        let context = pageData || {};
         context.layout = layout || 'external';
         res.render(template,context);
-    }
+    },
 };
