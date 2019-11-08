@@ -1,0 +1,19 @@
+{
+  "name": "@philku/phil-syf-uconn-hackathon",
+  "version": "1.0.0",
+  "description": "My entry for the SYF-UCONN Stamford Hackathon 2019",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philku/phil-syf-uconn-hackathon.git"
+  },
+  "author": "Philip Kubin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philku/phil-syf-uconn-hackathon/issues"
+  },
+  "homepage": "https://github.com/philku/phil-syf-uconn-hackathon#readme"
+}
