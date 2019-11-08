@@ -60,5 +60,5 @@ const server = app.listen(process.env.PORT, () => {
     const host = server.address().address;
     const port = server.address().port;
 
-    console.log(`Slate Intel API - listening at http://${host}:${port}`);
+    console.log(`Phil's stuff - listening at http://${host}:${port}`);
 });
