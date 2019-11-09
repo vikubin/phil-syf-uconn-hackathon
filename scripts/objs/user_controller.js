@@ -95,10 +95,21 @@ function listNames() {
     })
 }
 
+function userIdNameArray() {
+    return db.collection("users").get().then(snap=>{
+        let retArray = [];
+        snap.forEach(user=>{
+            retArray.push({uid:user.id,name:user.data().name});
+        });
+        return Promise.resolve(retArray);
+    });
+}
+
 module.exports = {
     loginUser,
     newUser,
     listNames,
+    userIdNameArray,
 };
 
 listNames();

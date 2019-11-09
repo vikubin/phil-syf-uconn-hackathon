@@ -1,9 +1,9 @@
 <div class="container">
     <div class="welcome text-center m-5">
-        <h1>{{projects.name}}</h1>
+        <h1>{{projects.name}}&nbsp&nbsp${{projects.budget}}</h1>
     </div>
     <div class="row">
-        <div class="col-md-4 text-center">
+        <div class="col-md-5 text-center">
             <h2>Approved Purchases</h2>
             <p>
                 Once the group votes yes on an item, it goes here.
@@ -15,24 +15,27 @@
                 <div class="project list-group-item">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{name}}</h5>
+                        <h3>${{data.maxPrice}}</h3>
                     </div>
                 </div>
                 {{/each}}
 
             </div>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-5 text-center">
             <h2>Suggested Purchases</h2>
 
             <div id="suggested-purchases">
 
                 {{#each purchases.suggested}}
                 <div class="project list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{name}}
+                    <div class="d-flex justify-content-between">
+                        <h5 class="mb-1">
+                            {{name}} - ${{data.maxPrice}}
                         </h5>
-                        <a href="/i/purchase/{{purchaseID}}/approve">Vote Yes</a><br>
-                        <a href="/i/purchase/{{purchaseID}}/deny">Vote No</a><br>
+                        <hr>
+                        <a href="/i/purchase/{{data.purchaseID}}/approve">Vote Yes</a><br>
+                        <a href="/i/purchase/{{data.purchaseID}}/deny">Vote No</a><br>
                     </div>
                 </div>
                 {{/each}}
@@ -42,8 +45,12 @@
         <div class="col-md-2 text-center">
             <h2>Options</h2>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_projectModal">
+            <button type="button" class="btn btn-primary btn-block mb-2" data-toggle="modal" data-target="#create_projectModal">
                 Suggest a Purchase
+            </button>
+
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPerson">
+                add a person
             </button>
 
         </div>
@@ -81,6 +88,40 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" onclick="">Create Purchase</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addPerson" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a person</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="/i/project/{{projects.pid}}/addPerson">
+                <div class="modal-body">
+
+                    <input type="hidden" name="pid" value="{{projects.pid}}">
+
+                    <div class="form-group">
+                        <label for="personUID">Person To add</label>
+                        <select class="form-control" name="personUID" id="personUID" >
+                            {{#each names}}
+                            <option value="{{uid}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" onclick="">Add</button>
                 </div>
             </form>
         </div>

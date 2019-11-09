@@ -11,9 +11,10 @@ function newPurchase(req,res) {
 
         function voters() {
             let voterList = [];
-            newProject.owners.forEach(voter =>{
-                voterList.push({voter,vote:null,comment:null})
-            })
+            newProject.owners.forEach(owner =>{
+                voterList.push({owner,vote:null,comment:null})
+            });
+            return voterList;
         }
 
         // Create purchase
@@ -42,8 +43,6 @@ function newPurchase(req,res) {
                 page.error(req,res,err);
         }
     });
-
-
 }
 
 function getData(purchaseID) {
@@ -60,14 +59,19 @@ function listMyPurchases(pid) {
     return db.collection("purchases").where("project","==",pid).get().then(snap => {
         let nameArray = {approved:[],suggested:[]};
         snap.forEach(item => {
+            console.log(item);
 
+            console.log(item.data());
             let approved = true;
 
-            item.data().voters.forEach(voter => {
-                if(voter.vote !== true){
-                    approved = false;
-                }
-            });
+            if(item.data().voters.length !== 0){
+                item.data().voters.forEach(voter => {
+                    console.log(voter.vote);
+                    if(voter.vote !== true){
+                        approved = false;
+                    }
+                });
+            }
 
             if(approved){
                 nameArray.approved.push({name:item.data().name,id:item.id,data:item.data()})
@@ -90,7 +94,8 @@ function approvePurchase(req,res) {
 
     newPurchase.get().then(()=>{
         newPurchase.voters.forEach(voter=>{
-            if(voter.uid === uid){
+            console.log(voter);
+            if(voter.owner === uid){
                 voter.vote = true;
             }
         });
@@ -108,7 +113,7 @@ function denyPurchase(req,res) {
 
     newPurchase.get().then(()=>{
         newPurchase.voters.forEach(voter=>{
-            if(voter.uid === uid){
+            if(voter.owner === uid){
                 voter.vote = false;
             }
         });

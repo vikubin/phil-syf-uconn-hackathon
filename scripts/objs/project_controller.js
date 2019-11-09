@@ -34,6 +34,14 @@ function getData(pid) {
     });
 }
 
+function addPerson(req,res) {
+    db.collection("projects").doc(req.params.pid).update({
+        owners: admin.firestore.FieldValue.arrayUnion(req.body.personUID)
+    }).then(()=>{
+        res.redirect("/i/");
+    });
+}
+
 function listMyProjects(req) {
     return db.collection("projects").where("owners","array-contains",req.session.userData.uid).get().then(snap => {
         let nameArray = [];
@@ -49,5 +57,6 @@ function listMyProjects(req) {
 module.exports = {
     newProject,
     getData,
+    addPerson,
     listMyProjects,
 };

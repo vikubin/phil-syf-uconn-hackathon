@@ -55,13 +55,15 @@ module.exports = {
 
         Promise.all([
             project_controller.getData(req.params.pid),
-            purchase_controller.listMyPurchases(req.params.pid)
+            purchase_controller.listMyPurchases(req.params.pid),
+            user_controller.userIdNameArray(),
         ]).then(pRet => {
 
             utils.render(res,res,{
                 userName: req.session.userData.name,
                 projects: pRet[0],
                 purchases: pRet[1],
+                names: pRet[2],
             },"internal_project","internal");
 
         }).catch(err => {
